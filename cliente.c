@@ -22,16 +22,16 @@ int main(int argc, char *argv[])
 	if(argc > 2)
 	{
  		//Primer paso, definir variables
- 	char *ip;
- 	int fd, numbytes,puerto;
- 	char buf[100];
- 	puerto=atoi(argv[2]);
- 	ip=argv[1];
+ 		char *ip;
+ 		int fd, numbytes,puerto;
+ 		char buf[100];
+ 		puerto=atoi(argv[2]);
+ 		ip=argv[1];
  
-	struct hostent *he;
- 	/*==Lee y valida argumentos==*/
- 	/* estructura que recibira informacion sobre el nodo remoto */
- 	struct sockaddr_in server;
+		struct hostent *he;
+ 		/*==Lee y valida argumentos==*/
+ 		/* estructura que recibira informacion sobre el nodo remoto */
+ 		struct sockaddr_in server;
  	/* informacion sobre la direccion del servidor */
 	if ((he=gethostbyname(ip))==NULL){
  		/* llamada a gethostbyname() */

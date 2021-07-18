@@ -1,4 +1,4 @@
-// Ficheros de cabecera
+// Ficheros de cabecera y librerias
 #include <stdio.h>
 #include <sys/types.h>
 #include <sys/socket.h>
@@ -9,18 +9,19 @@
 #include <time.h>
 #include <fcntl.h>
 #include <stdlib.h>
+//netbd.h es necesitada por la estructura hostent usando la funcion stat de C POXIS.
 
-//netbd.h es necesitada por la estructura hostent
 int main(int argc, char *argv[])
 {
+	//hacemos la declaracion de variables para nuestro programa 
 	struct stat datos;
 	struct tm *fecha;
 	char tipofich;
 	char *fichero2;
  
-if(argc > 2)
-{
- 	//Primer paso, definir variables
+	if(argc > 2)
+	{
+ 		//Primer paso, definir variables
  	char *ip;
  	int fd, numbytes,puerto;
  	char buf[100];
@@ -28,17 +29,17 @@ if(argc > 2)
  	ip=argv[1];
  
 	struct hostent *he;
- 	/*lee y valida argumentos*/
- 	/* estructura que recibirÃ¡ informaciÃ³n sobre el nodo remoto */
+ 	/*==Lee y valida argumentos==*/
+ 	/* estructura que recibira informacion sobre el nodo remoto */
  	struct sockaddr_in server;
- 	/* informaciÃ³n sobre la direcciÃ³n del servidor */
+ 	/* informacion sobre la direccion del servidor */
 	if ((he=gethostbyname(ip))==NULL){
  		/* llamada a gethostbyname() */
  		printf("gethostbyname() error\n");
  		exit(-1);
  	}
  
-	//Paso 2, definicion de socket y creacion de la conexion con el servidor
+	//Paso 2, Definicion de socket y creacion de la conexion con el servidor
  	if ((fd=socket(AF_INET, SOCK_STREAM, 0))==-1){
  		/* llamada a socket() */
  		printf("socket() error\n");
@@ -65,8 +66,7 @@ if(argc > 2)
  	}
  
 	buf[numbytes]='\0';
-	
-	 
+	//Se envia el nombre del archivo asi como el host y direccion.
 	 printf("Nombre de este host cliente: %s\n",argv[1]);
 	 printf("Direccion de internet de este host cliente: %s\n",argv[1]);
 	 printf("El puerto del servidor es: %s\n",argv[2]);
@@ -78,7 +78,7 @@ if(argc > 2)
 	 printf("================================================================\n");
 	 printf("================================================================\n");
 	 if (argc != 4)
-	{ 
+	{       /*si no se han ingresado parametros nos lanzara un error*/
 		perror("Necesario fichero o directorio como parámetro\n");
 		exit (-1);
 	}
@@ -87,7 +87,9 @@ if(argc > 2)
 		perror("Error en el stat");
 		exit (-1);
 	}
+	//nos muestra el nombre del archivo o fichero.
 	printf("Nombre del fichero: %s\n",argv[3]);
+	//nos muestra la informacion del fichero pedida.
 	printf("Recide en el dispositivo = %ld \n", (long) datos.st_dev);
 	printf("Numero de inode = %ld \n", (long) datos.st_ino);
 	printf("Tamaño(longitud) en bytes: %d\n",datos.st_size);

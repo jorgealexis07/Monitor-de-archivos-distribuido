@@ -54,8 +54,9 @@ if(listen(fd,5) == -1) {
  printf("error en accept()\n");
  exit(-1);
  }
- 
-send(fd2,"Bienvenido a mi servidor.\n",26,0);
+ //printf("Direccion ip del cliente: %s\n",fd);
+ //printf("Puerto del cliente: %s\n",puerto);
+ send(fd2,"Bienvenido a mi servidor.\n",26,0);
  
 close(fd2); /* cierra fd2 */
  }
@@ -63,8 +64,4 @@ close(fd);
 }
 else{
 printf("NO se ingreso el puerto por parametro\n");
-}
- 
-return 0;
- 
 }
